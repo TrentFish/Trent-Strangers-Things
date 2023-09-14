@@ -11,6 +11,7 @@ const Post = ({ posts, auth })=> {
   return (
     <div>
       <h1>{ post.title }</h1>
+      <h3>{ post.description}</h3>
       { auth._id === post.author._id ? <button>x</button>: ''}
     </div>
   );
