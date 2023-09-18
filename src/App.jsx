@@ -6,6 +6,8 @@ import Posts from './Posts';
 import Post from './Post';
 import AboutUs from './AboutUs';
 import ContactUs from './ContactUs';
+import Expensive from './MostExpensive.jsx';
+
 import { useNavigate, useParams, Link, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -56,7 +58,6 @@ function App() {
     navigate(`/posts/${post._id}`);
   };
 
-
   return (
     <>
       <h1><Link to='/'>Strangers Things ({ posts.length })</Link></h1>
@@ -64,12 +65,13 @@ function App() {
         auth.username ? (
           <div>
             <h1>
-              Welcome { auth.username } 
+              Welcome { auth.username } {`Your Post Total: ${ auth.posts.filter( post => post.active === true).length })`}
               <button onClick={ logout }>Logout</button>
             </h1>
-            <Link to='/posts/create'>Create A Post</Link>
-            <Link to='/about_us'>About Us</Link>
-            <Link to='/contact_us'>Contact Us</Link>
+            <Link to='/posts/create' className='top'>Create A Post</Link>
+            <Link to='/about_us' className='top'>About Us</Link>
+            <Link to='/contact_us' className='top'>Contact Us</Link>
+            <Link to='/expensive' className='top'> Most Expensive </Link>
             <Routes>
               <Route path='/posts/create' element={ <CreatePost createPost={ createPost } />} />
             </Routes>
@@ -80,6 +82,7 @@ function App() {
             <AuthForm submit={ login } txt='Login'/>
             <Link to='/about_us'>About Us</Link>
             <Link to='/contact_us'>Contact Us</Link>
+            <Link to='/expensive'> Most Expensive </Link>
           </>
         )
       }
@@ -88,6 +91,7 @@ function App() {
         <Route path='/posts/:id' element={ <Post posts={ posts } auth={ auth }/>} />
         <Route path='/about_us' element={ <AboutUs />} />
         <Route path='/contact_us' element={ <ContactUs />} />
+        <Route path='/expensive' element={<Expensive posts={posts}/>}/>
       </Routes>
     </>
   )

@@ -10,3 +10,14 @@ form > * {
 .mine {
   font-weight: bold;
 }
+
+body{
+  background-color: bisque;
+  text-align: center;
+}
+
+.top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
